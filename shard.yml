@@ -1,0 +1,13 @@
+name: notes
+version: 0.1.0
+
+authors:
+  - n7olkachev <n7olkachev@gmail.com>
+
+targets:
+  notes:
+    main: src/notes.cr
+
+crystal: 0.25.1
+
+license: MIT
