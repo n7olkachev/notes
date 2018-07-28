@@ -1,6 +1,6 @@
 require "./notes/*"
 
-# TODO: Write documentation for `Notes`
-module Notes
-  # TODO: Put your code here
-end
+app = Notes::Application.new(ENV["NOTES_HOME_DIR"]? || "#{ENV["HOME"]}/.notes")
+
+cli = Notes::Cli.new(app)
+cli.handle ARGV
