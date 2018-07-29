@@ -1,6 +1,6 @@
 module Notes
     class Cli
-        protected getter app : Notes::Application
+        protected getter app : Notes::ApplicationContract
 
         def initialize(@app)
         end

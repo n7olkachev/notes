@@ -1,5 +1,11 @@
 module Notes
+    module ApplicationContract
+        abstract def add_note(content : Strong)
+    end
+
     class Application
+        include ApplicationContract
+        
         protected getter home_dir : String
         
         def initialize(@home_dir)
