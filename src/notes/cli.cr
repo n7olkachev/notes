@@ -1,3 +1,6 @@
+require "tempfile"
+require "colorize"
+
 module Notes
     class Cli
         protected getter app : Notes::ApplicationContract
@@ -17,8 +20,19 @@ module Notes
         end
 
         protected def add(options : Array(String))
-            content = options[0]
+            if options[0]? == "-m"
+                content = options[1]
+            else
+                editor = ENV["EDITOR"]
+                tmp_file = Tempfile.new "NEW_NOTE"
+                system "#{editor} #{tmp_file.path}"
+                content = File.read tmp_file.path
+                tmp_file.delete
+            end
+
             app.add_note(content)
+
+            puts "Note added!".colorize(:green)
         end
     end
 end

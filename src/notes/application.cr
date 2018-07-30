@@ -5,10 +5,14 @@ module Notes
 
     class Application
         include ApplicationContract
-        
+
         protected getter home_dir : String
         
         def initialize(@home_dir)
+        end
+
+        def home_path(path : String)
+            "#{home_dir}/#{path}"
         end
 
         def add_note(content : String)
@@ -18,10 +22,6 @@ module Notes
 
         protected def ensure_home_dir_exists
             Dir.mkdir_p(home_dir)
-        end
-
-        protected def home_path(path : String)
-            "#{home_dir}/#{path}"
         end
     end
 end
