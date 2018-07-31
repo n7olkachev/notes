@@ -6,22 +6,14 @@ module Notes
     class Application
         include ApplicationContract
 
-        protected getter home_dir : String
+        protected getter repository : RepositoryContract
         
-        def initialize(@home_dir)
-        end
-
-        def home_path(path : String)
-            "#{home_dir}/#{path}"
+        def initialize(@repository)
         end
 
         def add_note(content : String)
-            ensure_home_dir_exists
-            File.write(home_path(Time.now.to_s("%Y-%m-%dT%H:%M:%S.txt")), content)
-        end
-
-        protected def ensure_home_dir_exists
-            Dir.mkdir_p(home_dir)
+            note = Note.new(content)
+            repository.save(note)
         end
     end
 end
